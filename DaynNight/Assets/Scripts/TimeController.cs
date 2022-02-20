@@ -51,6 +51,9 @@ public class TimeController : MonoBehaviour
 
     private TimeSpan sunsetTime;
 
+    public Seasons seasonScript;
+
+    private bool canChange = true;
 
     // Start is called before the first frame update
     void Start()
@@ -59,12 +62,12 @@ public class TimeController : MonoBehaviour
 
         sunriseTime = TimeSpan.FromHours(sunriseHour);
         sunsetTime = TimeSpan.FromHours(sunsetHour);
-
     }
 
-    private void Update()
+    void Update()
     {
         ControlTime();
+        ChangeDay();
     }
 
     // Update is called once per frame
@@ -123,19 +126,43 @@ public class TimeController : MonoBehaviour
 
     private void ControlTime()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
-            if (timeMultiplier < 6000)
+            if (timeMultiplier < 8000)
             {
                 timeMultiplier += speed;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.LeftArrow))
         {
-            if (timeMultiplier > -6000)
+            if (timeMultiplier > -8000)
             {
                 timeMultiplier -= speed;
             }
+        }
+
+        if (Input.GetKeyUp(KeyCode.RightArrow) && timeMultiplier > 4000)
+        {
+            timeMultiplier = 1000;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftArrow) && timeMultiplier < -4000)
+        {
+            timeMultiplier = -1000;
+        }
+    }
+
+    private void ChangeDay()
+    {
+        if (sunLight.transform.rotation.eulerAngles.x >= 325 && sunLight.transform.rotation.eulerAngles.x <= 345 && canChange == true)
+        {
+            seasonScript.day += 1;
+            canChange = false;
+            Debug.Log("ISSA NEW DAY");
+        }
+
+         else if (sunLight.transform.rotation.eulerAngles.x > 345 && sunLight.transform.rotation.eulerAngles.x <= 360)
+        {
+            canChange = true;
         }
     }
 
