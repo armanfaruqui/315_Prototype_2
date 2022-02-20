@@ -146,7 +146,7 @@ public class Seasons : MonoBehaviour
 
     private void summerToAutumn()
     {
-        if (day > 2 && whichSeason == "summer")
+        if (day > 4 && whichSeason == "summer")
         {
             tree1 = GameObject.Find("TreeSummer1");
             var treeTemp1 = Instantiate(TreeAutumn1, tree1.transform.position, tree1.transform.rotation, TreeParent.transform);
@@ -189,7 +189,7 @@ public class Seasons : MonoBehaviour
 
     private void autumnToWinter()
     {
-        if (day > 4 && whichSeason == "autumn")
+        if (day > 8 && whichSeason == "autumn")
         {
             tree1 = GameObject.Find("TreeAutumn1");
             var treeTemp1 = Instantiate(TreeWinter1, tree1.transform.position, tree1.transform.rotation, TreeParent.transform);
@@ -231,7 +231,7 @@ public class Seasons : MonoBehaviour
 
     private void winterToSpring()
     {
-        if (day > 6 && whichSeason == "winter")
+        if (day > 12 && whichSeason == "winter")
         {
             tree1 = GameObject.Find("TreeWinter1");
             var treeTemp1 = Instantiate(TreeSpring1, tree1.transform.position, tree1.transform.rotation, TreeParent.transform);
